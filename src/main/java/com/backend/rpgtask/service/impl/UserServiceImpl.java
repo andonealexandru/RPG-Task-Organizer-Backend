@@ -55,6 +55,8 @@ public class UserServiceImpl implements UserService {
         userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         userEntity.setEnabled(false);
         userEntity.setConfirmationToken(UUID.randomUUID().toString());
+        userEntity.setLevel(1);
+        userEntity.setMoney(0);
 
         RoleEntity userRole = new RoleEntity();
         userRole.setId(userDto.getId());

@@ -6,6 +6,8 @@ public class UserRest {
     private String firstName;
     private String lastName;
     private String email;
+    private Integer level;
+    private Integer money;
 
     public String getUserId() {
         return userId;
@@ -37,5 +39,21 @@ public class UserRest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
     }
 }

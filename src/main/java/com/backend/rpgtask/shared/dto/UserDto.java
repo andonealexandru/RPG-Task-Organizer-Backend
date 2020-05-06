@@ -15,6 +15,8 @@ public class UserDto implements Serializable {
     private String encryptedPassword;
     private Boolean enabled;
     private String confirmationToken;
+    private Integer level;
+    private Integer money;
 
     public long getId() {
         return id;
@@ -86,5 +88,21 @@ public class UserDto implements Serializable {
 
     public void setConfirmationToken(String confirmationToken) {
         this.confirmationToken = confirmationToken;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
     }
 }
