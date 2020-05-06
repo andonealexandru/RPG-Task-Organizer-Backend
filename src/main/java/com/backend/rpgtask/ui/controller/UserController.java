@@ -276,7 +276,7 @@ public class UserController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("andonealexandru19@gmail.com");
             mailMessage.setText("To confirm your account please clik here: " +
-                    "http://localhost:3000/users/confirm-account?token=" + createdUser.getConfirmationToken());
+                    "https://rpg-task-organizer.herokuapp.com/#/confirm/" + createdUser.getConfirmationToken());
 
             emailSenderService.sendEmail(mailMessage);
 
