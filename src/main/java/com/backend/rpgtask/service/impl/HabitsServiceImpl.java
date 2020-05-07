@@ -5,6 +5,7 @@ import com.backend.rpgtask.io.entity.UserEntity;
 import com.backend.rpgtask.io.repositories.HabitsRepository;
 import com.backend.rpgtask.io.repositories.UserRepository;
 import com.backend.rpgtask.service.HabitsService;
+import com.backend.rpgtask.service.UserService;
 import com.backend.rpgtask.shared.dto.HabitsDto;
 import com.backend.rpgtask.shared.dto.UserDto;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,9 @@ import java.util.List;
 public class HabitsServiceImpl implements HabitsService {
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     HabitsRepository habitsRepository;
 
     @Autowired
@@ -28,6 +32,11 @@ public class HabitsServiceImpl implements HabitsService {
 
     @Override
     public HabitsDto createTask(HabitsDto habitsDto) {
+
+        // add order
+        UserDto userDto = userService.getUserByUserId(habitsDto.getUserId());
+        List<HabitsDto> habitsDtos = getTasks(userDto);
+        habitsDto.setOrderNumber(habitsDtos.size());
 
         HabitsEntity habitsEntity = modelMapper.map(habitsDto, HabitsEntity.class);
         habitsEntity.setUserId(userRepository.findByUserId(habitsDto.getUserId()));

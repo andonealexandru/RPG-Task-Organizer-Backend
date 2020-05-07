@@ -5,6 +5,7 @@ import com.backend.rpgtask.io.entity.UserEntity;
 import com.backend.rpgtask.io.repositories.DailyRepository;
 import com.backend.rpgtask.io.repositories.UserRepository;
 import com.backend.rpgtask.service.DailyService;
+import com.backend.rpgtask.service.UserService;
 import com.backend.rpgtask.shared.dto.DailyDto;
 import com.backend.rpgtask.shared.dto.UserDto;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,9 @@ import java.util.List;
 public class DailyServiceImpl implements DailyService {
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     DailyRepository dailyRepository;
 
     @Autowired
@@ -28,6 +32,11 @@ public class DailyServiceImpl implements DailyService {
 
     @Override
     public DailyDto createTask(DailyDto dailyDto) {
+
+        // add order
+        UserDto userDto = userService.getUserByUserId(dailyDto.getUserId());
+        List<DailyDto> dailyDtos = getTasks(userDto);
+        dailyDto.setOrderNumber(dailyDtos.size());
 
         DailyEntity dailyEntity = modelMapper.map(dailyDto, DailyEntity.class);
         dailyEntity.setUserId(userRepository.findByUserId(dailyDto.getUserId()));

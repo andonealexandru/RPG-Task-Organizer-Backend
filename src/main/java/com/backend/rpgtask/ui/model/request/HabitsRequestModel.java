@@ -3,7 +3,6 @@ package com.backend.rpgtask.ui.model.request;
 public class HabitsRequestModel {
 
     private String userId;
-    private Integer order;
     private String taskTitle;
     private String taskText;
 
@@ -13,14 +12,6 @@ public class HabitsRequestModel {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
     }
 
     public String getTaskTitle() {

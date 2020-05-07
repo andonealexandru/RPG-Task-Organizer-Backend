@@ -1,6 +1,5 @@
 package com.backend.rpgtask.ui.controller;
 
-import com.backend.rpgtask.io.entity.DailyEntity;
 import com.backend.rpgtask.service.*;
 import com.backend.rpgtask.shared.dto.DailyDto;
 import com.backend.rpgtask.shared.dto.HabitsDto;
@@ -48,7 +47,6 @@ public class UserController {
     public DailyRest createDaily(@RequestBody HabitsRequestModel habitsRequestModel) {
 
         DailyDto dailyDto = modelMapper.map(habitsRequestModel, DailyDto.class);
-        dailyDto.setOrderNumber(habitsRequestModel.getOrder());
 
         DailyDto createdDto = dailyService.createTask(dailyDto);
 
@@ -114,7 +112,6 @@ public class UserController {
     public HabitsRest createHabits(@RequestBody HabitsRequestModel habitsRequestModel) {
 
         HabitsDto habitsDto = modelMapper.map(habitsRequestModel, HabitsDto.class);
-        habitsDto.setOrderNumber(habitsRequestModel.getOrder());
 
         HabitsDto createdDto = habitsService.createTask(habitsDto);
 
@@ -182,7 +179,6 @@ public class UserController {
     public ToDoRest createTodo(@RequestBody ToDoRequestModel toDoRequestModel) {
 
         ToDoDto toDoDto = modelMapper.map(toDoRequestModel, ToDoDto.class);
-        toDoDto.setOrderNumber(toDoRequestModel.getOrder());
 
         ToDoDto createdDto = toDoService.createTask(toDoDto);
 

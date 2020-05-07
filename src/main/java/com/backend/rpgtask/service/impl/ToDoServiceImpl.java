@@ -5,6 +5,7 @@ import com.backend.rpgtask.io.entity.UserEntity;
 import com.backend.rpgtask.io.repositories.ToDoRepository;
 import com.backend.rpgtask.io.repositories.UserRepository;
 import com.backend.rpgtask.service.ToDoService;
+import com.backend.rpgtask.service.UserService;
 import com.backend.rpgtask.shared.dto.ToDoDto;
 import com.backend.rpgtask.shared.dto.UserDto;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,9 @@ import java.util.List;
 public class ToDoServiceImpl implements ToDoService {
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     ToDoRepository toDoRepository;
 
     @Autowired
@@ -28,6 +32,11 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public ToDoDto createTask(ToDoDto toDoDto) {
+
+        // add order
+        UserDto userDto = userService.getUserByUserId(toDoDto.getUserId());
+        List<ToDoDto> toDoDtos = getTasks(userDto);
+        toDoDto.setOrderNumber(toDoDtos.size());
 
         ToDoEntity toDoEntity = modelMapper.map(toDoDto, ToDoEntity.class);
         toDoEntity.setUserId(userRepository.findByUserId(toDoDto.getUserId()));
