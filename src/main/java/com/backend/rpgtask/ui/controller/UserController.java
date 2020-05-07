@@ -236,6 +236,11 @@ public class UserController {
         UserDto userDto = userService.getUserByUserId(userId);
         toDoService.deleteTask(id, userDto);
 
+        //give money to user
+        UserUpdateRequestModel userUpdateRequestModel = modelMapper.map(userDto, UserUpdateRequestModel.class);
+        userUpdateRequestModel.setMoney(userUpdateRequestModel.getMoney() + 10);
+        updateUser(userUpdateRequestModel, userId);
+
         operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.name());
 
         return operationStatusModel;
