@@ -102,6 +102,11 @@ public class UserController {
         UserDto userDto = userService.getUserByUserId(userId);
         dailyService.deleteTask(id, userDto);
 
+        //give money to user
+        UserUpdateRequestModel userUpdateRequestModel = modelMapper.map(userDto, UserUpdateRequestModel.class);
+        userUpdateRequestModel.setMoney(userUpdateRequestModel.getMoney() + 10);
+        updateUser(userUpdateRequestModel, userId);
+
         operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.name());
 
         return operationStatusModel;
@@ -169,6 +174,11 @@ public class UserController {
         UserDto userDto = userService.getUserByUserId(userId);
         habitsService.deleteTask(id, userDto);
 
+        //give money to user
+        UserUpdateRequestModel userUpdateRequestModel = modelMapper.map(userDto, UserUpdateRequestModel.class);
+        userUpdateRequestModel.setMoney(userUpdateRequestModel.getMoney() + 10);
+        updateUser(userUpdateRequestModel, userId);
+        
         operationStatusModel.setOperationResult(RequestOperationStatus.SUCCESS.name());
 
         return operationStatusModel;
