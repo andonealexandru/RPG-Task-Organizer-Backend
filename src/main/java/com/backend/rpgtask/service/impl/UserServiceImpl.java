@@ -103,8 +103,8 @@ public class UserServiceImpl implements UserService {
 
         if (userEntity == null) throw new RuntimeException(userId);
 
-        userEntity.setFirstName(user.getFirstName());
-        userEntity.setLastName(user.getLastName());
+        userEntity.setMoney(user.getMoney());
+        userEntity.setLevel(user.getLevel());
 
         UserEntity updatedUserDetails = userRepository.save(userEntity);
         BeanUtils.copyProperties(updatedUserDetails, userDto);

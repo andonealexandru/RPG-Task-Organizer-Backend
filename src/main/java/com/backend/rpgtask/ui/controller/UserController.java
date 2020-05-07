@@ -8,6 +8,7 @@ import com.backend.rpgtask.shared.dto.UserDto;
 import com.backend.rpgtask.ui.model.request.HabitsRequestModel;
 import com.backend.rpgtask.ui.model.request.ToDoRequestModel;
 import com.backend.rpgtask.ui.model.request.UserDetailsRequestModel;
+import com.backend.rpgtask.ui.model.request.UserUpdateRequestModel;
 import com.backend.rpgtask.ui.model.response.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -298,13 +299,11 @@ public class UserController {
     @PutMapping(path = "/{id}",
             consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE },
             produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-    public UserRest updateUser(@RequestBody UserDetailsRequestModel userDetailsRequestModel, @PathVariable String id) {
+    public UserRest updateUser(@RequestBody UserUpdateRequestModel userUpdateRequestModel, @PathVariable String id) {
         UserRest userRest = new UserRest();
 
-        if (userDetailsRequestModel.getFirstName().isEmpty()) throw new RuntimeException("User already exists");
-
         UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(userDetailsRequestModel, userDto);
+        BeanUtils.copyProperties(userUpdateRequestModel, userDto);
 
         UserDto updatedUser = userService.updateUser(id, userDto);
         BeanUtils.copyProperties(updatedUser, userRest);
