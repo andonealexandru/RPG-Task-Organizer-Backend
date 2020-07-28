@@ -22,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("users") // localhost:8080/users
+@CrossOrigin(origins = "https://rpg-task-organizer.herokuapp.com/")
 public class UserController {
 
     @Autowired
